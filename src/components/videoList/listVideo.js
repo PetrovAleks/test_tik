@@ -5,19 +5,18 @@ import { userVideoStore } from '../../store/UserVideo'
 import { observer } from 'mobx-react-lite'
 
 export const VideoList = observer((props) => {
-  const videoList = props.data.map((el, i) => {
-    console.dir(el)
-    const video = el.videos.tiny.url
+  const videoList = props.data.map((item, i) => {
 
+    const videoUrl = item.videos.tiny.url
     return (
-      <li className="video-item">
+      <li className="video-item" key={item.id}>
         <CardVideo
           key={i}
-          user={el.user}
-          id={el.id}
-          video={video}
-          click={() => userVideoStore.toggleLike(video)}
-          liked={userVideoStore.isLiked(video)}
+          user={item.user}
+          id={item.id}
+          videoUrl={videoUrl}
+          click={() => userVideoStore.toggleLike(item)}
+          liked={userVideoStore.isLiked(item)}
         />
       </li>
     )

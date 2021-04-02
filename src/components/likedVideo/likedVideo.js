@@ -5,8 +5,8 @@ import { userVideoStore } from '../../store/UserVideo'
 export const LikedVideo = observer((props) => {
   const list = userVideoStore.likedVideos.map((el, i) => {
     return (
-      <li className="item-liked-video" key={el.id} id={el.id} onClick={() => props.onSetIdVidoe(el.id)}>
-        {el.link}
+      <li className="item-liked-video" key={el.id} id={el.id} onClick={() => userVideoStore.selectedVideoId = el.id}>
+        {el.user} - {el.id}
       </li>
     )
   })

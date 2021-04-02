@@ -3,7 +3,7 @@ class VideoService {
   BASE_URL = `https://pixabay.com/api/videos/?key=${this.API_KEY}`
 
   getNewVideo = async (pages = 1) => {
-    const resourse = await fetch(this.BASE_URL + '&q=yellow+flowers')
+    const resourse = await fetch(this.BASE_URL + '&q=red+flowers')
 
     return await resourse.json().then((data) => {
       return data.hits
@@ -14,18 +14,6 @@ class VideoService {
     const resourse = await fetch(this.BASE_URL + '&q=yellow+flowers')
     return await resourse.json().then((data) => {
       return data.hits
-    })
-  }
-
-  getVideoById = async (id) => {
-    const resourse = await fetch(this.BASE_URL + `videos/${id}`, {
-      headers: {
-        Authorization: this.API_KEY,
-      },
-    })
-
-    return await resourse.json().then((data) => {
-      return data.videos
     })
   }
 }

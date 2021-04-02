@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 import Header from './header/header'
+import Footer from './footer/footer'
 import { DiscoverPage } from '../pages/discover'
 import Main from '../pages/main'
 
@@ -22,6 +23,7 @@ class App extends Component {
 
           <Redirect to="/main" />
         </Switch>
+        <Footer />
       </div>
     )
   }

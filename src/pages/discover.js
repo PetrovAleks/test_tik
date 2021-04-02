@@ -13,13 +13,13 @@ export const DiscoverPage = () => {
     videoService.getPopularVideo().then((data) => setPopularVideo(data))
     videoService.getNewVideo().then((data) => setNewVideo(data))
   }, [])
-  console.dir(popularVideo)
+
   return (
     <section className="discover">
       <div className="container ">
         <MainSlider />
         <VideoList data={popularVideo} />
-        {/* <VideoList data={newVideo} /> */}
+        <VideoList data={newVideo} />
       </div>
     </section>
   )

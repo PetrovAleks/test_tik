@@ -1,14 +1,18 @@
-import { makeObservable, observable, action } from 'mobx'
+import { makeObservable, observable, action, computed } from 'mobx'
 
 class UserVideoStore {
-  likedVideos = []
+  likedVideos = [];
+  selectedVideoId = null;
 
   constructor(likedVideos) {
     makeObservable(this, {
+      selectedVideoId: observable,
       likedVideos: observable,
       toggleLike: action,
+      selectedVideo: computed
     })
     this.likedVideos = likedVideos
+    this.selectedVideoId = null;
   }
 
   isLiked(video) {
@@ -16,7 +20,6 @@ class UserVideoStore {
   }
 
   toggleLike(video) {
-    console.dir(video.id)
     const index = this.likedVideos.findIndex((i) => i.id === video.id)
     if (index > -1) {
       this.likedVideos.splice(index, 1)
@@ -24,6 +27,11 @@ class UserVideoStore {
     } else {
       this.likedVideos = [...this.likedVideos, video]
     }
+  }
+
+  get selectedVideo() {
+    const video = this.likedVideos.find((i) => i.id === this.selectedVideoId)
+    return video ? video : null;
   }
 }
 
