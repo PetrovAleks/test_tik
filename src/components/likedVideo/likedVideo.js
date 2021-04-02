@@ -1,24 +1,14 @@
-import { React, Component } from "react";
+import { observer } from 'mobx-react'
+import { React } from 'react'
+import { userVideoStore } from '../../store/UserVideo'
 
-export default class LikedVideo extends Component {
-	state = {
-		videoList: [],
-	};
-	componentDidMount() {
-		this.setState((prevState) => {
-			return {
-				videoList: [...prevState.videoList, ...this.props.listLikedVideo],
-			};
-		});
-	}
-	render() {
-		const list = this.state.videoList.map((el, i) => {
-			return (
-				<li className="item-liked-video" id={el.id}>
-					{el.name}
-				</li>
-			);
-		});
-		return <ul className="list-liked-video">{list}</ul>;
-	}
-}
+export const LikedVideo = observer((props) => {
+  const list = userVideoStore.likedVideos.map((el, i) => {
+    return (
+      <li className="item-liked-video" key={el.id} id={el.id} onClick={() => props.onSetIdVidoe(el.id)}>
+        {el.link}
+      </li>
+    )
+  })
+  return <ul className="list-liked-video">{list}</ul>
+})

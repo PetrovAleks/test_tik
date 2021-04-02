@@ -1,2 +1,2 @@
-const navList = ["main", "discover"];
-export default navList;
+const navList = ['main', 'discover']
+export default navList

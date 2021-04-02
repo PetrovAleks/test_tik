@@ -1,30 +1,26 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from 'react'
 
-import MainSlider from "../components/slider/slider";
-import sliderData from "../components/slider/sliderData";
-import Service from "../services/sevices";
+import MainSlider from '../components/slider/slider'
+import { videoService } from '../services/VideoService'
 
-import VideoList from "../components/videoList/listVideo";
+import { VideoList } from '../components/videoList/listVideo'
 
-export default class Discover extends Component {
-	services = new Service();
-	render() {
-		return (
-			<section className="discover">
-				<div className="container ">
-					<MainSlider sliderData={sliderData} />
-					<VideoList
-						services={() => this.services.getPopularVideo()}
-						click={this.props.onHendelClick}
-					/>
-					<div className="llist-wrapper">
-						<VideoList
-							services={() => this.services.getNewVideo()}
-							click={this.props.onHendelClick}
-						/>
-					</div>
-				</div>
-			</section>
-		);
-	}
+export const DiscoverPage = () => {
+  const [popularVideo, setPopularVideo] = useState([])
+  const [newVideo, setNewVideo] = useState([])
+
+  useEffect(() => {
+    videoService.getPopularVideo().then((data) => setPopularVideo(data))
+    videoService.getNewVideo().then((data) => setNewVideo(data))
+  }, [])
+  console.dir(popularVideo)
+  return (
+    <section className="discover">
+      <div className="container ">
+        <MainSlider />
+        <VideoList data={popularVideo} />
+        {/* <VideoList data={newVideo} /> */}
+      </div>
+    </section>
+  )
 }

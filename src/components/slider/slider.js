@@ -1,32 +1,38 @@
-import React from "react";
-import { Slider } from "@lifarl/react-scroll-snap-slider";
+import React from 'react'
+import { Slider } from '@lifarl/react-scroll-snap-slider'
 
-const MainSlider = (props) => {
-	const sliderImg = props.sliderData.map((el, i) => {
-		return (
-			<div key={i} className="slider-item">
-				<div className="wrapper-img">
-					<img
-						className="slider-img"
-						src={el.src_1}
-						alt={el.alt_1}
-						width="400px"
-					/>
-				</div>
-				<div className="wrapper-img">
-					<img
-						className="slider-img"
-						src={el.src_2}
-						alt={el.alt_2}
-						width="400px"
-					/>
-				</div>
-			</div>
-		);
-	});
-	const slider = <Slider>{sliderImg}</Slider>;
+const images = [
+  {
+    src_1: 'https://cdn.pixabay.com/photo/2017/04/10/08/08/church-window-2217785_960_720.jpg',
+    src_2: 'https://cdn.pixabay.com/photo/2017/06/18/18/26/holi-2416686_960_720.jpg',
+  },
+  {
+    src_1: 'https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg',
+    src_2: 'https://killerattitudestatus.in/wp-content/uploads/2019/12/gud-night-images.jpg',
+  },
+  {
+    src_1: 'https://cdn.pixabay.com/photo/2017/04/10/08/08/church-window-2217785_960_720.jpg',
+    src_2: 'https://cdn.pixabay.com/photo/2017/06/18/18/26/holi-2416686_960_720.jpg',
+  },
+]
 
-	return <div className="slider-list">{slider}</div>;
-};
+const MainSlider = () => {
+  return (
+    <div className="slider-list">
+      <Slider>
+        {images.map((imageData, index) =>
+          <div key={index} className="slider-item">
+            <div className="wrapper-img">
+              <img className="slider-img" src={imageData.src_1} width="400px" alt='some' />
+            </div>
+            <div className="wrapper-img">
+              <img className="slider-img" src={imageData.src_2} width="400px" alt='some' />
+            </div>
+          </div> 
+        )}
+      </Slider>
+    </div>
+  )
+}
 
-export default MainSlider;
+export default MainSlider

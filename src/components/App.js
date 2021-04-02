@@ -1,53 +1,30 @@
-import React, { Component } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import React, { Component } from 'react'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
-import Header from "./header/header";
-import Discover from "../pages/discover";
-import Main from "../pages/main";
+import Header from './header/header'
+import { DiscoverPage } from '../pages/discover'
+import Main from '../pages/main'
 
-export default class App extends Component {
-	state = {
-		listLikedVideo: [],
-	};
-	onHendelClick = (card) => {
-		console.dir(card);
-		const likedVideo = [
-			{
-				name: card.props.user.name,
-				id: card.props.id,
-			},
-		];
-		this.setState((prevState) => {
-			console.dir(prevState.listLikedVideo);
-			return {
-				listLikedVideo: [...prevState.listLikedVideo, ...likedVideo],
-			};
-		});
-	};
-	render() {
-		return (
-			<div className="App">
-				<Header />
-				<Switch>
-					<Route
-						path="/main"
-						render={(props) => (
-							<Main {...props} listLikedVideo={this.state.listLikedVideo} />
-						)}
-					/>
-					<Route
-						path="/discover"
-						render={(props) => (
-							<Discover
-								{...props}
-								onHendelClick={(card) => this.onHendelClick(card)}
-							/>
-						)}
-					/>
+import { videoService } from '../services/VideoService'
 
-					<Redirect to="/main" />
-				</Switch>
-			</div>
-		);
-	}
+class App extends Component {
+  state = {
+    listLikedVideo: [],
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Header />
+        <Switch>
+          <Route path="/main" render={(props) => <Main />} />
+          <Route path="/discover" render={() => <DiscoverPage />} />
+
+          <Redirect to="/main" />
+        </Switch>
+      </div>
+    )
+  }
 }
+
+export { App, videoService }
